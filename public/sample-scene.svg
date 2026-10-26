@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200">
+  <rect width="600" height="200" fill="#f0f4f1"/>
+  <rect x="40" y="30" width="520" height="140" rx="12" fill="white" stroke="#216747" stroke-width="2"/>
+  <rect x="130" y="80" width="340" height="60" fill="#d9e9df"/>
+  <circle cx="280" cy="100" r="26" fill="#216747"/>
+  <text x="300" y="58" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#244333">Camera frame / Task object</text>
+</svg>

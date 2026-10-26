@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif; }
+  button, a, select, textarea { outline-offset: 4px; }
+  :focus-visible { outline: 2px solid #25704b; }
+}
+@layer components {
+  .eyebrow { @apply text-[10px] font-semibold tracking-[0.16em] text-stone-500; }
+  .button { @apply inline-flex items-center gap-2 rounded-md border border-stone-300 bg-white px-3 py-2 text-xs font-medium text-stone-700 transition-colors hover:bg-stone-50 disabled:cursor-not-allowed disabled:opacity-40; }
+  .button.primary { @apply border-emerald-800 bg-emerald-800 text-white hover:bg-emerald-900; }
+  .button:active { transform: translateY(1px); }
+  .source-area { @apply block h-[300px] w-full resize-y rounded-lg border border-stone-200 bg-white p-4 font-mono text-xs leading-6 text-stone-700; }
+}
+.prose-document { line-height: 1.85; font-size: 14px; overflow-wrap: anywhere; }
+.prose-document h1 { font-size: 28px; font-weight: 650; margin: 0 0 24px; }
+.prose-document h2 { font-size: 22px; font-weight: 650; margin: 36px 0 16px; padding-bottom: 10px; border-bottom: 1px solid #dce4dd; }
+.prose-document h3 { font-size: 17px; font-weight: 650; margin: 26px 0 12px; }
+.prose-document p { margin: 12px 0; }
+.prose-document ul, .prose-document ol { margin: 12px 0; padding-left: 24px; }
+.prose-document ul { list-style: disc; } .prose-document ol { list-style: decimal; }
+.prose-document a { color: #156843; text-decoration: underline; text-underline-offset: 3px; }
+.prose-document table { display: block; max-width: 100%; overflow: auto; border-collapse: collapse; font-size: 13px; margin: 20px 0; }
+.prose-document th, .prose-document td { border: 1px solid #dce4dd; padding: 10px 12px; min-width: 105px; vertical-align: top; }
+.prose-document th { background: #f2f6f2; text-align: left; }
+.prose-document pre { background: #f1f4f1; border-radius: 6px; padding: 18px; overflow: auto; }
+.prose-document code { font-size: 12px; background: #eef2ee; padding: 2px 4px; border-radius: 3px; }
+.prose-document blockquote { margin: 16px 0; border-left: 3px solid #88b29a; padding-left: 16px; color: #65766c; }
+.prose-document img { max-width: 100%; }

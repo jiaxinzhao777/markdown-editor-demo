@@ -1,0 +1,171 @@
+{
+  "reviewedOn": "2026-10-26",
+  "react": "19.2.3",
+  "source": "Installed package metadata; exact resolutions in package-lock.json",
+  "packages": [
+    {
+      "name": "@uiw/react-md-editor",
+      "version": "4.1.5",
+      "license": "MIT",
+      "peerDependencies": {
+        "react": ">=16.8.0",
+        "react-dom": ">=16.8.0"
+      },
+      "homepage": "https://uiwjs.github.io/react-md-editor/",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/uiwjs/react-md-editor"
+      }
+    },
+    {
+      "name": "@mdxeditor/editor",
+      "version": "4.3.3",
+      "license": "MIT",
+      "peerDependencies": {
+        "react": ">= 18 || >= 19",
+        "react-dom": ">= 18 || >= 19"
+      },
+      "homepage": "https://mdxeditor.dev/",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/mdx-editor/editor.git"
+      }
+    },
+    {
+      "name": "@milkdown/crepe",
+      "version": "7.22.3",
+      "license": "MIT",
+      "peerDependencies": {},
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Milkdown/milkdown.git",
+        "directory": "packages/crepe"
+      }
+    },
+    {
+      "name": "vditor",
+      "version": "4.0.1",
+      "license": "MIT",
+      "peerDependencies": {},
+      "homepage": "https://b3log.org/vditor",
+      "repository": {
+        "type": "git",
+        "url": "git://github.com/Vanessa219/vditor.git"
+      }
+    },
+    {
+      "name": "@toast-ui/editor",
+      "version": "3.2.2",
+      "license": "MIT",
+      "peerDependencies": {},
+      "homepage": "https://ui.toast.com",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/nhn/tui.editor.git",
+        "directory": "apps/editor"
+      }
+    },
+    {
+      "name": "@tiptap/react",
+      "version": "3.32.0",
+      "license": "MIT",
+      "peerDependencies": {
+        "@types/react": "^17.0.0 || ^18.0.0 || ^19.0.0",
+        "@types/react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0",
+        "react": "^17.0.0 || ^18.0.0 || ^19.0.0",
+        "react-dom": "^17.0.0 || ^18.0.0 || ^19.0.0",
+        "@tiptap/core": "3.32.0",
+        "@tiptap/pm": "3.32.0"
+      },
+      "homepage": "https://tiptap.dev",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ueberdosis/tiptap",
+        "directory": "packages/react"
+      }
+    },
+    {
+      "name": "@tiptap/markdown",
+      "version": "3.32.0",
+      "license": "MIT",
+      "peerDependencies": {
+        "@tiptap/pm": "3.32.0",
+        "@tiptap/core": "3.32.0"
+      },
+      "homepage": "https://tiptap.dev",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/ueberdosis/tiptap",
+        "directory": "packages/markdown"
+      }
+    },
+    {
+      "name": "@blocknote/core",
+      "version": "0.56.0",
+      "license": "MPL-2.0",
+      "peerDependencies": {
+        "@y/prosemirror": "^2.0.0-15",
+        "@y/protocols": "^1.0.6-rc.1",
+        "@y/y": "^14.0.0-rc.26",
+        "y-prosemirror": "^1.3.7",
+        "y-protocols": "^1.0.6",
+        "yjs": "^13.6.33"
+      },
+      "homepage": "https://github.com/TypeCellOS/BlockNote",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/TypeCellOS/BlockNote.git",
+        "directory": "packages/core"
+      }
+    },
+    {
+      "name": "@blocknote/react",
+      "version": "0.56.0",
+      "license": "MPL-2.0",
+      "peerDependencies": {
+        "react": "^18.0 || ^19.0 || >= 19.0.0-rc",
+        "react-dom": "^18.0 || ^19.0 || >= 19.0.0-rc"
+      },
+      "homepage": "https://github.com/TypeCellOS/BlockNote",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/TypeCellOS/BlockNote.git",
+        "directory": "packages/react"
+      }
+    },
+    {
+      "name": "codemirror",
+      "version": "6.0.2",
+      "license": "MIT",
+      "peerDependencies": {},
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/codemirror/basic-setup.git"
+      }
+    },
+    {
+      "name": "md-editor-rt",
+      "version": "7.1.0",
+      "license": "MIT",
+      "peerDependencies": {
+        "react": ">=18.0.0",
+        "react-dom": ">=18.0.0"
+      },
+      "homepage": "https://imzbf.github.io/md-editor-rt/",
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/imzbf/md-editor-rt.git"
+      }
+    },
+    {
+      "name": "easymde",
+      "version": "2.21.0",
+      "license": "MIT",
+      "peerDependencies": {},
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/Ionaru/easy-markdown-editor.git"
+      }
+    }
+  ]
+}

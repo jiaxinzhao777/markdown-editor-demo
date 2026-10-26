@@ -1,0 +1,28 @@
+:root { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif; color: #25372f; background: white; color-scheme: light; }
+body { margin: 0; padding: 12px; }
+button { cursor: pointer; }
+.loading { padding: 32px; background: #f1f5f2; color: #3c5c4b; }
+.document-body { min-height: 420px; padding: 24px 32px; line-height: 1.8; font-size: 15px; }
+.document-body:focus { outline: 2px solid #c4dfd0; }
+.document-body table { border-collapse: collapse; width: 100%; }
+.document-body th, .document-body td { border: 1px solid #cbd8d0; padding: 8px; }
+.document-body th { background: #f1f5f2; }
+.document-body blockquote { border-left: 3px solid #abc8b8; margin-left: 0; padding-left: 16px; color: #566b60; }
+.document-body pre { background: #f1f5f2; padding: 16px; overflow: auto; }
+.document-body img { max-width: 100%; }
+.document-body a { color: #156943; text-decoration: underline; }
+.document-body ul[data-type='taskList'] { list-style: none; padding-left: 0; }
+.document-body ul[data-type='taskList'] li { display: flex; gap: 8px; align-items: baseline; }
+.simple-toolbar { display: flex; flex-wrap: wrap; gap: 5px; padding: 10px; border-bottom: 1px solid #dbe3de; }
+.simple-toolbar button { border: 1px solid #dbe3de; background: #f8faf9; padding: 6px 12px; border-radius: 4px; }
+.milkdown .editor { padding: 28px 42px; }
+.bn-container { padding: 24px 8px; min-height: 450px; }
+.editor-toolbar i::before { font-family: sans-serif; font-style: normal; }
+.editor-toolbar .lab-bold::before { content: 'B'; font-weight: 700; }
+.editor-toolbar .lab-italic::before { content: 'I'; font-style: italic; }
+.editor-toolbar .lab-heading::before { content: 'H'; }
+.editor-toolbar .lab-list::before { content: '≡'; }
+.editor-toolbar .lab-link::before { content: '↗'; }
+.editor-toolbar .lab-table::before { content: '⊞'; }
+.editor-toolbar .lab-preview::before { content: '◉'; }
+@media (max-width: 600px) { body { padding: 4px; } .document-body { padding: 20px 14px; } }
