@@ -23,6 +23,8 @@ function download(text: string, name: string) {
 function Workspace({ id, sample }: { id: EditorId; sample: SampleId }) {
   const frame = useRef<HTMLIFrameElement>(null);
   const initial = samples[sample].markdown;
+  const pendingMarkdown = useRef(initial);
+  const [frameRevision, setFrameRevision] = useState(0);
   const [source, setSource] = useState<string>(initial);
   const [baseline, setBaseline] = useState<string>(initial);
   const [output, setOutput] = useState('');
@@ -36,15 +38,23 @@ function Workspace({ id, sample }: { id: EditorId; sample: SampleId }) {
   const diff = compareText(baseline, output);
 
   const load = (markdown: string) => {
+    pendingMarkdown.current = markdown;
     setError(''); setReceived(false); setStatus('正在载入文档…'); setBaseline(markdown);
     frame.current?.contentWindow?.postMessage({ channel: CHANNEL, type: 'load', markdown }, location.origin);
+  };
+
+  const reload = () => {
+    const markdown = received ? output : pendingMarkdown.current;
+    pendingMarkdown.current = markdown;
+    setBaseline(markdown); setReceived(false); setError(''); setStatus('正在重新加载编辑器…');
+    setFrameRevision((revision) => revision + 1);
   };
 
   useEffect(() => {
     function receive(event: MessageEvent<unknown>) {
       if (event.origin !== location.origin || event.source !== frame.current?.contentWindow || !isFrameEvent(event.data)) return;
       if (event.data.type === 'ready') {
-        frame.current?.contentWindow?.postMessage({ channel: CHANNEL, type: 'load', markdown: initial }, location.origin);
+        frame.current?.contentWindow?.postMessage({ channel: CHANNEL, type: 'load', markdown: pendingMarkdown.current }, location.origin);
       } else if (event.data.type === 'output') {
         setOutput(event.data.markdown); setReceived(true); setStatus('已读取编辑器输出');
       } else {
@@ -53,13 +63,13 @@ function Workspace({ id, sample }: { id: EditorId; sample: SampleId }) {
     }
     window.addEventListener('message', receive);
     return () => window.removeEventListener('message', receive);
-  }, [initial]);
+  }, []);
 
   useEffect(() => {
     if (received || error) return;
     const timer = setTimeout(() => setStatus('加载较慢，请检查网络或点击重新加载。'), 25000);
     return () => clearTimeout(timer);
-  }, [received, error]);
+  }, [received, error, frameRevision]);
 
   return <>
     <div className="grid gap-5 border-y border-stone-200 py-5 lg:grid-cols-[1fr_1fr_1.1fr]">
@@ -72,6 +82,7 @@ function Workspace({ id, sample }: { id: EditorId; sample: SampleId }) {
       <div className="flex flex-wrap gap-2">
         <button className="button" aria-pressed={narrow} onClick={() => setNarrow(!narrow)}>{narrow ? '展开编辑区' : '模拟 520px 弹窗'}</button>
         <button className="button" onClick={() => { setSource(initial); load(initial); }}><ReloadIcon />重置样例</button>
+        <button className="button" onClick={reload}><ReloadIcon />重新加载编辑器</button>
       </div>
     </div>
     <section className="overflow-hidden rounded-xl border border-stone-200 bg-white">
@@ -81,7 +92,7 @@ function Workspace({ id, sample }: { id: EditorId; sample: SampleId }) {
       </div>
       {error && <div role="alert" className="border-b border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">{error}。可以修改下方输入源码后重新载入，或切换样例。</div>}
       <div className={narrow ? 'mx-auto max-w-[520px] border-x border-stone-200' : ''}>
-        <iframe ref={frame} src={`./editor.html?editor=${id}`} title={`${current.name} 编辑器`} className="block h-[560px] w-full border-0" />
+        <iframe key={frameRevision} ref={frame} src={`${import.meta.env.BASE_URL}editor.html?editor=${id}`} title={`${current.name} 编辑器`} className="block h-[560px] w-full border-0" />
       </div>
     </section>
     <div className="my-5 flex flex-wrap items-center justify-between gap-3">

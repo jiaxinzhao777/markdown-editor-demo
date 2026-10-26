@@ -87,7 +87,7 @@ export const samples = {
   edge: {
     name: '格式边界样例',
     context: '核对嵌套列表、图片、代码、HTML、脚注和公式；未启用的扩展不应默默丢失。',
-    markdown: '# 格式往返检查\n\n1. 第一层\n   - 第二层 **加粗**\n   - 链接含路径：[说明](https://example.com/a/b?q=1)\n2. 第二项\n\n| 场景 | 备注 |\n| --- | --- |\n| 台面 | 左侧 \\| 右侧 |\n\n![采集视野示意](/sample-scene.svg)\n\n```json\n{ "task_id": "kitchen-clean", "valid": true }\n```\n\n```mermaid\ngraph LR\n  A[采集] --> B[审核]\n```\n\n保留公式源码：$x^2 + y^2$。\n\n脚注引用[^note]。\n\n[^note]: 这段文字不应在保存时丢失。\n\n<details>\n<summary>补充说明</summary>\n只读端未启用原始 HTML。\n</details>\n',
+    markdown: '# 格式往返检查\n\n1. 第一层\n   - 第二层 **加粗**\n   - 链接含路径：[说明](https://example.com/a/b?q=1)\n2. 第二项\n\n| 场景 | 备注 |\n| --- | --- |\n| 台面 | 左侧 \\| 右侧 |\n\n![采集视野示意](' + import.meta.env.BASE_URL + 'sample-scene.svg)\n\n```json\n{ "task_id": "kitchen-clean", "valid": true }\n```\n\n```mermaid\ngraph LR\n  A[采集] --> B[审核]\n```\n\n保留公式源码：$x^2 + y^2$。\n\n脚注引用[^note]。\n\n[^note]: 这段文字不应在保存时丢失。\n\n<details>\n<summary>补充说明</summary>\n只读端未启用原始 HTML。\n</details>\n',
   },
   empty: { name: '空白文档', context: '从空白开始，测试输入、撤销、粘贴与重开。', markdown: '' },
 };

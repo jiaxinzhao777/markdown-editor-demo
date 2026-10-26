@@ -10,7 +10,7 @@ export default function Vditor({ initialMarkdown, onChange }: EditorProps) {
     let disposed = false;
     const editor = new VditorEditor(root.current, {
       value: initialMarkdown, height: 520, mode: 'ir', lang: 'zh_CN',
-      cdn: '/vendor/vditor', cache: { enable: false },
+      cdn: `${import.meta.env.BASE_URL}vendor/vditor`, cache: { enable: false },
       toolbar: ['headings', 'bold', 'italic', 'strike', '|', 'list', 'ordered-list',
         'check', 'quote', 'code', 'link', 'table', '|', 'undo', 'redo', 'edit-mode', 'preview'],
       preview: { hljs: { enable: false } },

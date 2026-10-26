@@ -21,6 +21,42 @@ npm run preview
 
 `dev` / `build` 会自动准备 Vditor 本地资源。部署整个 `dist` 目录，包含首页和 iframe 使用的 `editor.html`。
 
+## 发布到 GitHub Pages
+
+仓库已包含 `.github/workflows/deploy.yml`，推送 `main` 后自动构建、检查 10 个编辑器并发布。使用 GitHub 官方 Pages 工作流，无需配置个人访问令牌。
+
+1. 打开仓库 **Settings → Pages**，将 **Build and deployment → Source** 设置为 **GitHub Actions**。
+2. 提交并推送本次修改：
+
+   ```sh
+   git add .github/workflows/deploy.yml .gitignore README.md package.json vite.config.ts playwright.config.ts tests src
+   git commit -m "feat: 支持 GitHub Pages 在线试用与自动部署"
+   git push -u origin main
+   ```
+
+3. 在 **Actions → Deploy to GitHub Pages** 查看结果。成功后通过以下地址分享：
+
+   https://jiaxinzhao777.github.io/markdown-editor-demo/
+
+若推送时尚未启用 Pages，完成第 1 步后在 Actions 中重新运行工作流。GitHub Free 账号需要公开仓库；私有仓库的 Pages 支持取决于账号套餐。工作流会读取 Pages 的部署路径，适配项目子目录和自定义域名；本地开发默认仍使用 `/`。
+
+参考：[Vite 部署指南](https://vite.dev/guide/static-deploy#github-pages)、[GitHub Pages 自定义工作流](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)。
+
+## 发布前验证
+
+在 macOS / Linux 下模拟 GitHub Pages 的子目录部署：
+
+```sh
+DEPLOY_BASE_PATH=/markdown-editor-demo/ npm run build
+npx playwright install chromium
+npm run test:e2e
+DEPLOY_BASE_PATH=/markdown-editor-demo/ npm run preview
+```
+
+预览地址为 http://127.0.0.1:4317/markdown-editor-demo/ 。测试使用独立的 4319 端口和构建产物，覆盖 10 个编辑器加载、子目录资源、样例图片、重新加载、保存重开、Markdown 下载及对比报告。编辑器初始加载测试会阻止并记录站点外的资源请求，避免演示意外依赖第三方 CDN。
+
+已有 Chrome 时，可用 `PLAYWRIGHT_CHANNEL=chrome npm run test:e2e`；CI 自动安装并使用 Playwright Chromium。更换部署路径时，构建和测试需使用相同的 `DEPLOY_BASE_PATH`。
+
 ## 常见报错
 
 - `Failed to resolve import "../docs/editor-comparison.md?raw"`：报告是首页的构建输入，不能遗漏。文件应存在于 `docs/editor-comparison.md`。
@@ -35,6 +71,8 @@ npm run preview
 - `src/adapters/`：10 个编辑器的真实接入。
 - `src/main.tsx`：选型界面、报告和输出比较。
 - `src/editor.tsx`：隔离样式的编辑器 iframe。
+- `.github/workflows/deploy.yml`：构建、浏览器验证和 GitHub Pages 自动发布。
+- `tests/deployment.spec.ts`：发布产物的浏览器回归检查。
 - `docs/editor-comparison.md`：对比矩阵、场景建议、限制和验收步骤。
 - `docs/dependency-snapshot.json`：已安装主包的版本与许可元数据。
 
@@ -42,4 +80,8 @@ npm run preview
 
 ## 本次验证（2026-10-26）
 
-`npm run build` 通过（包含 TypeScript 检查）。在新启动的开发服务中，Chromium 验证了 10 个编辑器载入“采集标准文档”并返回非空 Markdown，未出现页面异常；对比文档可以显示和下载。尚未覆盖全部边界样例、输入法和完整编辑交互。构建仍有大于 500 kB 的分包提示；md-editor-rt 会尝试加载外部 Cropper 资源，离线部署时还需处理。
+以 `/markdown-editor-demo/` 为基础路径的生产构建通过；使用本机 Chrome 运行的 12 项 Playwright 检查全部通过。GitHub 托管环境中的构建与部署结果需在首次推送后的 Actions 页面确认。
+
+构建包含 TypeScript 检查。Vditor 和样例图片跟随部署基础路径；md-editor-rt 关闭未接后端的图片上传功能，避免加载外部 Cropper 资源。编辑器按需加载，网络异常时可点击“重新加载编辑器”，保留最近收到的 Markdown 输出。
+
+浏览器测试覆盖标准样例和关键试用流程，尚未覆盖全部边界语法、输入法和完整编辑交互。构建仍有大于 500 kB 的编辑器分包提示；首次打开较重的编辑器需要下载对应资源。

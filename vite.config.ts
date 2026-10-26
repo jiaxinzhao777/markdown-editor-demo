@@ -5,6 +5,7 @@ import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
 
 export default defineConfig({
+  base: process.env.DEPLOY_BASE_PATH || '/',
   plugins: [react()],
   css: { postcss: { plugins: [tailwindcss({ content: ['./src/main.tsx'] }), autoprefixer()] } },
   build: {

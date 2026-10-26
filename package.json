@@ -9,6 +9,7 @@
     "prebuild": "node scripts/prepare-assets.mjs",
     "build": "tsc --noEmit && vite build",
     "typecheck": "tsc --noEmit",
+    "test:e2e": "playwright test",
     "preview": "vite preview --host 127.0.0.1 --port 4317 --strictPort"
   },
   "dependencies": {
