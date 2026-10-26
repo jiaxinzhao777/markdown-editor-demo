@@ -6,8 +6,17 @@ import { ArrowTopRightIcon, DownloadIcon, ReaderIcon, ReloadIcon } from '@radix-
 import { compareText, editors, samples, type EditorId, type SampleId } from './catalog';
 import { CHANNEL, isFrameEvent } from './protocol';
 import packageJson from '../package.json';
-import comparison from '../docs/editor-comparison.md?raw';
+import comparisonSource from '../docs/editor-comparison.md?raw';
 import './main.css';
+
+// Keep relative screenshot links usable in the repository and in the deployed report.
+const reportImages = import.meta.glob<string>('../docs/images/editor-review/*.png', {
+  eager: true, query: '?url', import: 'default',
+});
+const comparison = comparisonSource.replace(/\]\((images\/editor-review\/[^)]+)\)/g, (link, path: string) => {
+  const asset = reportImages[`../docs/${path}`];
+  return asset ? `](${new URL(asset, window.location.href).href})` : link;
+});
 
 function Markdown({ text }: { text: string }) {
   return <div className="prose-document"><ReactMarkdown remarkPlugins={[remarkGfm]} skipHtml>{text}</ReactMarkdown></div>;
